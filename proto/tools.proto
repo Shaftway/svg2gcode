@@ -1,0 +1,47 @@
+syntax = "proto2";
+
+message ToolList {
+  repeated Tool tool = 1;
+}
+
+message Tool {
+  required string uuid = 1;
+  required string name = 2;
+  required Units units = 3;
+  
+  oneof end_type {
+    FlatEndTool flat_end_tool = 4;
+    BallEndTool ball_end_tool = 5;
+  }
+}
+
+message FlatEndTool {
+  required Units units = 1;
+  optional float shaft_diameter = 2;
+  required float head_diameter = 3;
+  optional float flutes_length = 4;
+  optional float taper_angle = 5;
+}
+
+message BallEndTool {
+  required Units units = 1;
+  optional float shaft_diameter = 2;
+  required float head_diameter = 3;
+  optional float flutes_diameter = 4;
+  optional float flutes_length = 5;
+  optional float taper_angle = 6;
+}
+
+enum Units {
+  UNITS_UNKNOWN = 0;
+  MM = 1;
+  CM = 2;
+  IN = 3;
+}
+
+enum EndType {
+  END_TYPE_UNKNOWN = 0;
+  FLAT_END = 1;
+  BALL_END = 2;
+}
+
